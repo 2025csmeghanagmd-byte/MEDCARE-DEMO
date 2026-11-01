@@ -1,0 +1,26 @@
+name: MEDCARE Docker CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  build-backend:
+    name: Build backend Docker image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+      - name: Build backend image
+        run: docker build -t medcare-backend:ci ./backend
+
+  build-frontend:
+    name: Build frontend Docker image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+      - name: Build frontend image
+        run: docker build -t medcare-frontend:ci ./frontend
